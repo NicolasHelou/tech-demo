@@ -1,0 +1,13 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1744228014
+icon.svg::CompressedTexture2D/CompressedTexture2D::2453223344314541105::1744216035::1744216041::1::::<><><>0<>0<>994e8d4467cb86277e8fab97ceadc6cb<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://Images/::1744216152
+::res://Scenes/::1744228014
+demo.tscn::PackedScene::8572685906095189828::1744227667::0::1::::<><><>0<>0<><>::uid://ba7mh27kb3h4l::::res://icon.svg<>uid://cbc2sluknlly4::::res://Scenes/player.tscn
+groundstate.gd::GDScript::2148469146070543072::1744227968::0::1::::<>State<><>0<>0<><>::
+player.tscn::PackedScene::4848831078752449121::1744227895::0::1::::<><><>0<>0<><>::uid://3mai2gepbfpg::::res://Scripts/player.gd<>uid://ba7mh27kb3h4l::::res://icon.svg<>uid://dcpqf6injls2r::::res://Scripts/character_state_machine.gd
+::res://Scripts/::1744228014
+airstate.gd::GDScript::6834900816077706026::1744228009::0::1::::<>State<><>0<>0<><>::
+character_state_machine.gd::GDScript::7331587446705483895::1744227894::0::1::::CharacterStateMachine<>Node<><>0<>0<><>::
+player.gd::GDScript::1990075868865975952::1744227667::0::1::::<>CharacterBody2D<><>0<>0<><>::
+State.gd::GDScript::401027933451526952::1744227894::0::1::::State<>Node<><>0<>0<><>::

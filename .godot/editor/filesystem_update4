@@ -1,0 +1,9 @@
+res://Scenes/demo.tscn
+res://Scripts/player.gd
+res://Scenes/player.tscn
+res://Scripts/character_state_machine.gd
+res://Scripts/State.gd
+res://Scripts/groundstate.gd
+res://Scripts/airstate.gd
+res://Scripts/landingstate.gd
+res://Scripts/statedebug.gd
