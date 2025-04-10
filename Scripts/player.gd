@@ -15,7 +15,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		velocity = get_gravity() * delta
+		velocity += get_gravity() * delta
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -31,7 +31,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	update_animation()
 	update_facing_direction()
-	print(velocity.y)
 
 func update_animation():
 	animation_tree.set("parameters/Move/blend_position", direction.x)
