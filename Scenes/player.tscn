@@ -171,6 +171,7 @@ transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
+jump_velocity = -450.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(411, 319)

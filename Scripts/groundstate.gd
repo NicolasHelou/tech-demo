@@ -10,5 +10,6 @@ func state_input(event : InputEvent):
 		jump()
 
 func jump():
-	character.velocity.y = jump_velocity
+	character.velocity.y = -600.0
 	next_state = air_state
+	print(character.velocity.y)

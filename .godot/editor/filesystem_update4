@@ -1,6 +1,4 @@
 res://Scenes/demo.tscn
-res://Scripts/airstate.gd
-res://Scripts/player.gd
 res://Scenes/player.tscn
 res://Scripts/groundstate.gd
-res://Scripts/statedebug.gd
+res://Scripts/player.gd
