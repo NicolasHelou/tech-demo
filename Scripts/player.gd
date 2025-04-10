@@ -4,6 +4,7 @@ var direction :Vector2 = Vector2.ZERO
 
 @export var speed = 300.0
 @export var jump_velocity = -150.0
+@export var gravity : float = 980.0
 
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var sprite : Sprite2D = $Sprite2D
@@ -15,7 +16,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity.y = gravity * delta
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -37,6 +38,6 @@ func update_animation():
 	
 func update_facing_direction():
 	if direction.x > 0:
-		sprite.flip_h = false
+		sprite.flip_v = false
 	elif direction.x < 0:
-		sprite.flip_h = true
+		sprite.flip_v = true

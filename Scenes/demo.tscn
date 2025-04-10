@@ -145,4 +145,4 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAAAAAEAAAABAAEAAAAAAAIAAAABAAE
 tile_set = SubResource("TileSet_m0rpm")
 
 [node name="player" parent="." instance=ExtResource("2_glc8m")]
-position = Vector2(-87, 143)
+position = Vector2(-101, 162)
