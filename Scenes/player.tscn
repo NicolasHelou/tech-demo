@@ -1,12 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://cbc2sluknlly4"]
+[gd_scene load_steps=25 format=3 uid="uid://cbc2sluknlly4"]
 
 [ext_resource type="Script" uid="uid://3mai2gepbfpg" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ba7mh27kb3h4l" path="res://icon.svg" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://dcpqf6injls2r" path="res://Scripts/character_state_machine.gd" id="3_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://bmvfe0fjl6f0t" path="res://Images/29072.png" id="3_f1ek2"]
 [ext_resource type="Script" uid="uid://5uy8cypowhgi" path="res://Scripts/groundstate.gd" id="4_x3wgy"]
 [ext_resource type="Script" uid="uid://c4m422o0pn1nq" path="res://Scripts/airstate.gd" id="5_3smsa"]
 [ext_resource type="Script" uid="uid://bjkshpfmlj7ss" path="res://Scripts/landingstate.gd" id="6_8erm5"]
 [ext_resource type="Script" uid="uid://cphqmw0uismm6" path="res://Scripts/statedebug.gd" id="7_3smsa"]
+[ext_resource type="Script" uid="uid://blds3f13o2pey" path="res://Scripts/dying.gd" id="7_8erm5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
 radius = 50.0
@@ -50,6 +52,47 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_8erm5"]
+resource_name = "die"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_f1ek2")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 }
 
 [sub_resource type="Animation" id="Animation_cvnsp"]
@@ -139,6 +182,7 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fkybt"]
 _data = {
 &"RESET": SubResource("Animation_6t5aa"),
+&"die": SubResource("Animation_8erm5"),
 &"idle": SubResource("Animation_cvnsp"),
 &"run": SubResource("Animation_vgqql")
 }
@@ -161,25 +205,34 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_8erm5")
 blend_point_2/pos = -1.0
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f1ek2"]
+animation = &"die"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tx1dd"]
 advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gymyn"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pu2lt"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gymyn"]
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_f1ek2")
 states/Move/position = Vector2(338, 100)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_tx1dd")]
+states/die/node = SubResource("AnimationNodeAnimation_f1ek2")
+states/die/position = Vector2(514, 100)
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_tx1dd"), "Move", "die", SubResource("AnimationNodeStateMachineTransition_gymyn"), "die", "Move", SubResource("AnimationNodeStateMachineTransition_pu2lt")]
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
 jump_velocity = -450.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(411, 319)
-texture = ExtResource("1_v0iea")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(412, 318)
 shape = SubResource("CapsuleShape2D_cvnsp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(411, 319)
+texture = ExtResource("1_v0iea")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -191,21 +244,31 @@ tree_root = SubResource("AnimationNodeStateMachine_gymyn")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = 0.025
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "character")]
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "character", "animation_tree")]
 script = ExtResource("3_6t5aa")
 current_state = NodePath("Ground")
 character = NodePath("..")
+animation_tree = NodePath("../AnimationTree")
 
-[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state")]
+[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("die_state", "air_state")]
 script = ExtResource("4_x3wgy")
+die_state = NodePath("../Dying")
 air_state = NodePath("../Air")
 
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("die_state", "ground_state")]
 script = ExtResource("5_3smsa")
+die_state = NodePath("../Dying")
 ground_state = NodePath("../Ground")
 
 [node name="Landing" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("6_8erm5")
+
+[node name="Dying" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "ground_state")]
+script = ExtResource("7_8erm5")
+air_state = NodePath("../Air")
+ground_state = NodePath("../Ground")
+can_move = false
+is_dead = true
 
 [node name="statedebug" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = 342.0
@@ -215,3 +278,13 @@ offset_bottom = 253.0
 text = "State: "
 script = ExtResource("7_3smsa")
 state_machine = NodePath("../CharacterStateMachine")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(412, 318)
+shape = SubResource("CapsuleShape2D_cvnsp")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

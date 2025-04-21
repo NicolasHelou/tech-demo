@@ -1,8 +1,11 @@
+State
+Area2D
+Timer
+Node
 CollisionShape2D
 Sprite2D
 CharacterBody2D
 Label
-Node
 AnimationTree
 AnimationPlayer
 TileMapLayer

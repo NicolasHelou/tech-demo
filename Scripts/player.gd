@@ -8,27 +8,28 @@ var direction :Vector2 = Vector2.ZERO
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var state_machine : CharacterStateMachine = $CharacterStateMachine
+@onready var timer : Timer = $Timer
+
 func _ready():
+	add_to_group("player")
 	animation_tree.active = true
-	
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		pass
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	direction = Input.get_vector("left", "right", "up", "down")
 	if direction.x != 0 and state_machine.check_if_can_move():
 		velocity.x = direction.x * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
-
-	move_and_slide()
+	if state_machine.check_if_is_dead():
+		queue_free()
+		timer.start()
+		_on_timer_timeout()
+	else:
+		move_and_slide()
 	update_animation()
 	update_facing_direction()
 
@@ -40,3 +41,6 @@ func update_facing_direction():
 		sprite.flip_v = false
 	elif direction.x < 0:
 		sprite.flip_v = true
+
+func _on_timer_timeout():
+	get_tree().reload_current_scene()
