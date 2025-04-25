@@ -209,11 +209,12 @@ blend_mode = 1
 animation = &"die"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tx1dd"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gymyn"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pu2lt"]
+switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gymyn"]
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_f1ek2")
@@ -259,6 +260,7 @@ air_state = NodePath("../Air")
 script = ExtResource("5_3smsa")
 die_state = NodePath("../Dying")
 ground_state = NodePath("../Ground")
+ground_animation = "idle"
 
 [node name="Landing" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("6_8erm5")

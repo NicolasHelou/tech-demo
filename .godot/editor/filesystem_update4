@@ -1,6 +1,4 @@
-res://Scenes/player.tscn
-res://Scripts/character_state_machine.gd
-res://Scripts/groundstate.gd
-res://Scripts/State.gd
 res://Scenes/demo.tscn
 res://Scripts/airstate.gd
+res://Scenes/player.tscn
+res://Scripts/groundstate.gd
