@@ -13,11 +13,17 @@ var direction :Vector2 = Vector2.ZERO
 func _ready():
 	add_to_group("player")
 	animation_tree.active = true
+	Global.character = "1"
 
 func _physics_process(delta: float) -> void:
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	
+	if state_machine.check_if_dashing():
+		velocity.y = 0
+		speed = 600.0
 
 	direction = Input.get_vector("left", "right", "up", "down")
 	if direction.x != 0 and state_machine.check_if_can_move():

@@ -27,6 +27,9 @@ func check_if_can_move():
 func check_if_is_dead():
 	return current_state.is_dead
 
+func check_if_dashing():
+	return current_state.is_dashing
+
 func switch_states(new_state : State):
 	if (current_state != null):
 		current_state.on_exit()

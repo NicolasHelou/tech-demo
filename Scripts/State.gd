@@ -4,6 +4,9 @@ class_name State
 
 @export var can_move: bool = true
 @export var is_dead: bool = false
+@export var is_dashing : bool = false
+@export var can_dash : bool = false
+
 
 var character : CharacterBody2D
 var next_state: State
@@ -20,4 +23,8 @@ func on_exit():
 func die():
 	pass
 func change_to_state():
+	pass
+func airdash():
+	pass
+func dash():
 	pass
