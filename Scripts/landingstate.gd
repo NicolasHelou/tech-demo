@@ -1,4 +1,9 @@
 extends State
 
 class_name LandingState
-# Called when the node enters the scene tree for the first time.
+
+@export var ground_state: State
+func state_process(delta):
+	character.velocity.y = 500.0
+	if character.is_on_floor():
+		next_state = ground_state

@@ -1,8 +1,3 @@
 res://Scenes/demo.tscn
-res://Scenes/airdash.gd
 res://Scenes/player.tscn
-res://Scripts/player.gd
-res://Scripts/State.gd
-res://Scripts/character_state_machine.gd
-res://Scripts/groundstate.gd
-res://Scripts/airstate.gd
+res://Scenes/airdash.gd
