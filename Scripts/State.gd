@@ -6,7 +6,7 @@ class_name State
 @export var is_dead: bool = false
 @export var is_dashing : bool = false
 @export var can_dash : bool = false
-
+@export var can_walljump : bool = false
 
 var character : CharacterBody2D
 var next_state: State
@@ -27,4 +27,6 @@ func change_to_state():
 func airdash():
 	pass
 func dash():
+	pass
+func walljump():
 	pass

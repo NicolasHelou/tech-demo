@@ -13,7 +13,7 @@ var direction :Vector2 = Vector2.ZERO
 func _ready():
 	add_to_group("player")
 	animation_tree.active = true
-	Global.character = "1"
+	Global.character = "2"
 
 func _physics_process(delta: float) -> void:
 

@@ -258,11 +258,12 @@ script = ExtResource("4_x3wgy")
 die_state = NodePath("../Dying")
 air_state = NodePath("../Air")
 
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("die_state", "ground_state", "dash_state")]
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("die_state", "ground_state", "dash_state", "wall_state")]
 script = ExtResource("5_3smsa")
 die_state = NodePath("../Dying")
 ground_state = NodePath("../Ground")
 dash_state = NodePath("../Airdash")
+wall_state = NodePath("../Walljump")
 ground_animation = "idle"
 
 [node name="Landing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
@@ -286,8 +287,9 @@ is_dashing = true
 [node name="dashtimer" type="Timer" parent="CharacterStateMachine/Airdash"]
 wait_time = 1.5
 
-[node name="Walljump" type="Node" parent="CharacterStateMachine"]
+[node name="Walljump" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
 script = ExtResource("10_gymyn")
+ground_state = NodePath("../Ground")
 
 [node name="statedebug" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = 342.0
