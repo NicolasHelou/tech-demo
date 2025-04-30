@@ -1,4 +1,8 @@
 Node
+HBoxContainer
+VBoxContainer
+Button
+ColorRect
 Timer
 State
 Area2D
@@ -8,4 +12,3 @@ CharacterBody2D
 Label
 AnimationTree
 AnimationPlayer
-TileMapLayer

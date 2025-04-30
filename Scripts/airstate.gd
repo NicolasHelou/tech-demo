@@ -26,7 +26,7 @@ func state_input(event : InputEvent):
 		die()
 	if can_dash and event.is_action_pressed("dash"):
 		airdash()
-	if character.is_on_wall() and event.is_action_pressed("jump") and can_walljump:
+	if character.is_on_wall() and can_walljump:
 		walljump()
 
 func die():

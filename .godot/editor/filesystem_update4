@@ -1,3 +1,8 @@
 res://Scenes/demo.tscn
-res://Scenes/walljump.gd
+res://Scripts/player.gd
 res://Scenes/player.tscn
+res://Scenes/select.gd
+res://Scenes/select.tscn
+res://Scenes/wall_slide.gd
+res://Scripts/airstate.gd
+res://wall_slide.gd

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cbc2sluknlly4"]
+[gd_scene load_steps=28 format=3 uid="uid://cbc2sluknlly4"]
 
 [ext_resource type="Script" uid="uid://3mai2gepbfpg" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ba7mh27kb3h4l" path="res://icon.svg" id="1_v0iea"]
@@ -9,8 +9,9 @@
 [ext_resource type="Script" uid="uid://bjkshpfmlj7ss" path="res://Scripts/landingstate.gd" id="6_8erm5"]
 [ext_resource type="Script" uid="uid://cphqmw0uismm6" path="res://Scripts/statedebug.gd" id="7_3smsa"]
 [ext_resource type="Script" uid="uid://blds3f13o2pey" path="res://Scripts/dying.gd" id="7_8erm5"]
-[ext_resource type="Script" uid="uid://bw3peb2jlo052" path="res://Scenes/airdash.gd" id="9_tx1dd"]
-[ext_resource type="Script" uid="uid://c3ldekvgvc74" path="res://Scenes/walljump.gd" id="10_gymyn"]
+[ext_resource type="Script" uid="uid://bw3peb2jlo052" path="res://airdash.gd" id="9_tx1dd"]
+[ext_resource type="Script" uid="uid://c3ldekvgvc74" path="res://Scripts/walljump.gd" id="10_gymyn"]
+[ext_resource type="Script" uid="uid://d2i7ef7tyw3id" path="res://wall_slide.gd" id="11_pu2lt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
 radius = 50.0
@@ -263,7 +264,7 @@ script = ExtResource("5_3smsa")
 die_state = NodePath("../Dying")
 ground_state = NodePath("../Ground")
 dash_state = NodePath("../Airdash")
-wall_state = NodePath("../Walljump")
+wall_state = NodePath("../WallSlide")
 ground_animation = "idle"
 
 [node name="Landing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
@@ -290,6 +291,12 @@ wait_time = 1.5
 [node name="Walljump" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
 script = ExtResource("10_gymyn")
 ground_state = NodePath("../Ground")
+
+[node name="WallSlide" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("wall_jump", "ground_state", "air_state")]
+script = ExtResource("11_pu2lt")
+wall_jump = NodePath("../Walljump")
+ground_state = NodePath("../Ground")
+air_state = NodePath("../Air")
 
 [node name="statedebug" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = 342.0
