@@ -9,9 +9,9 @@
 [ext_resource type="Script" uid="uid://bjkshpfmlj7ss" path="res://Scripts/landingstate.gd" id="6_8erm5"]
 [ext_resource type="Script" uid="uid://cphqmw0uismm6" path="res://Scripts/statedebug.gd" id="7_3smsa"]
 [ext_resource type="Script" uid="uid://blds3f13o2pey" path="res://Scripts/dying.gd" id="7_8erm5"]
-[ext_resource type="Script" uid="uid://bw3peb2jlo052" path="res://airdash.gd" id="9_tx1dd"]
+[ext_resource type="Script" uid="uid://bw3peb2jlo052" path="res://Scripts/airdash.gd" id="9_tx1dd"]
 [ext_resource type="Script" uid="uid://c3ldekvgvc74" path="res://Scripts/walljump.gd" id="10_gymyn"]
-[ext_resource type="Script" uid="uid://d2i7ef7tyw3id" path="res://wall_slide.gd" id="11_pu2lt"]
+[ext_resource type="Script" uid="uid://d2i7ef7tyw3id" path="res://Scripts/wall_slide.gd" id="11_pu2lt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
 radius = 50.0
@@ -286,7 +286,6 @@ landing_state = NodePath("../Landing")
 is_dashing = true
 
 [node name="dashtimer" type="Timer" parent="CharacterStateMachine/Airdash"]
-wait_time = 1.5
 
 [node name="Walljump" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
 script = ExtResource("10_gymyn")

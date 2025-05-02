@@ -15,6 +15,7 @@ func state_input(event : InputEvent):
 		die()
 
 func state_process(_delta):
+	character.velocity.x = character.direction.x * character.speed
 	if!character.is_on_floor():
 		next_state = air_state
 

@@ -9,12 +9,18 @@ class_name airdash_state
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	dash_timer.start()
-func state_input(event : InputEvent):
-	if (event.is_action_pressed("dash")) and can_dash:
-		dash()
+
+func state_process(delta):
+	dash()
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func dash():
-	can_dash = false
+	character.velocity.y = 0
+	character.velocity.x = character.direction.x * 900.0
+	
 	
 func _on_dashtimer_timeout():
 	next_state = landing_state
+	dash_timer.stop()
+	print("timer done")
